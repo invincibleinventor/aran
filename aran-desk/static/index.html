@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aran Desk</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%231c1f4a%22/><path d=%22M16 5l9 4v7c0 6-4 9-9 11-5-2-9-5-9-11V9z%22 fill=%22%23d9442b%22/></svg>">
+<style>
+:root {
+  --ink: #0a0d12; --panel: #111823; --panel-2: #0d141d; --raise: #16202d;
+  --line: #22303f; --line-2: #2d3f52; --muted: #7d8ea0; --text: #e7eef4;
+  --lime: #c8f751; --lime-dim: #93b936; --lime-deep: #1f2e12;
+  --mag: #ff2d6f; --mag-deep: #2e0f1b; --amber: #ffb02e; --amber-deep: #2d2410; --violet: #9b6bff;
+  --sans: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", "Tamil Sangam MN", "Noto Sans Tamil", sans-serif;
+  --cond: "Avenir Next Condensed", "Avenir Next", -apple-system, "Tamil Sangam MN", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); color: var(--text); font: 15px/1.5 var(--sans);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 46px 46px; background-position: center -1px; background-attachment: fixed; }
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(130% 80% at 80% -10%, rgba(200,247,81,.07), transparent 55%),
+    radial-gradient(120% 70% at 0% 110%, rgba(255,45,111,.06), transparent 55%); }
+h1, h2, h3 { font-family: var(--cond); font-weight: 700; }
+.mono { font-family: var(--sans); font-variant-numeric: tabular-nums; letter-spacing: .3px; word-break: break-all; }
+button { font: inherit; font-weight: 600; cursor: pointer; border: 0; border-radius: 2px; padding: 11px 20px; letter-spacing: .2px; transition: filter .15s, transform .05s; }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: .3; cursor: not-allowed; }
+.btn { background: var(--lime); color: #0a0d12; box-shadow: 0 0 0 1px var(--lime), 0 0 18px rgba(200,247,81,.25); }
+.btn:hover:not(:disabled) { filter: brightness(1.08); }
+.btn.red { background: var(--mag); color: #fff; box-shadow: 0 0 0 1px var(--mag), 0 0 18px rgba(255,45,111,.3); }
+.btn.teal { background: var(--lime); color: #0a0d12; }
+.btn.ghost { background: transparent; color: var(--muted); padding: 11px 10px; box-shadow: none; font-weight: 600; }
+.btn.ghost:hover { color: var(--lime); }
+.btn.outline { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px var(--line-2); }
+.btn.outline:hover { box-shadow: inset 0 0 0 1px var(--lime); color: var(--lime); }
+
+header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 18px; padding: 15px 28px;
+  background: rgba(10,13,18,.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-2); }
+header .logo { font-family: var(--cond); font-size: 25px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+header .logo b { color: var(--lime); }
+header .logo span { font-family: var(--sans); color: var(--muted); font-weight: 600; margin-left: 8px; letter-spacing: 0; text-transform: none; font-size: 18px; }
+header .sub { color: var(--muted); font-size: 13px; border-left: 1px solid var(--line-2); padding-left: 18px; }
+header .spacer { flex: 1; }
+.pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 2px; font-size: 12.5px; font-weight: 600; background: var(--panel); border: 1px solid var(--line-2); color: var(--muted); }
+.pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 8px var(--lime); }
+.lang { display: flex; background: var(--panel); border: 1px solid var(--line-2); border-radius: 2px; padding: 3px; }
+.lang button { padding: 5px 13px; background: transparent; color: var(--muted); font-size: 13px; border-radius: 1px; }
+.lang button.on { background: var(--lime); color: #0a0d12; }
+
+.layout { position: relative; z-index: 1; display: grid; grid-template-columns: 250px 1fr; gap: 30px; max-width: 1320px; margin: 0 auto; padding: 28px 28px 90px; }
+nav.steps { position: sticky; top: 94px; align-self: start; }
+.step { display: flex; gap: 13px; align-items: center; padding: 9px 0; color: var(--muted); }
+.step .n { flex: none; width: 32px; height: 32px; display: grid; place-items: center; font-family: var(--cond); font-weight: 700; font-size: 14px; color: var(--muted);
+  background: var(--panel); border: 1px solid var(--line-2); transition: .3s;
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 72% 100%, 0 100%); }
+.step b { display: block; font-size: 14.5px; font-weight: 600; color: inherit; letter-spacing: .2px; }
+.step small { font-size: 11.5px; color: var(--muted); }
+.step.active { color: var(--text); } .step.active .n { background: var(--lime); color: #0a0d12; border-color: var(--lime); box-shadow: 0 0 16px rgba(200,247,81,.4); }
+.step.active b { color: var(--lime); }
+.step.done { color: var(--text); } .step.done .n { background: var(--lime-deep); color: var(--lime); border-color: var(--lime-dim); }
+.guarantees { margin-top: 24px; padding: 16px; background: var(--panel-2); border: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+.guarantees div { padding: 4px 0 4px 18px; position: relative; }
+.guarantees div::before { content: "›"; position: absolute; left: 2px; color: var(--lime); font-weight: 800; }
+
+main { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.card { position: relative; background: var(--panel); border: 1px solid var(--line-2); padding: 26px 28px; animation: rise .45s ease both; }
+.card::before { content: ""; position: absolute; top: -1px; left: -1px; width: 20px; height: 20px; border-top: 2px solid var(--lime); border-left: 2px solid var(--lime); }
+.card h2 { margin: 0 0 5px; font-size: 24px; letter-spacing: .3px; }
+.card h2 .ta { font-family: var(--sans); font-weight: 600; color: var(--muted); font-size: 15px; margin-left: 10px; }
+.card .lead { color: var(--muted); margin: 0 0 18px; max-width: 70ch; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.hidden { display: none !important; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+.check { display: flex; gap: 13px; align-items: center; padding: 13px 15px; border: 1px solid var(--line-2); margin-bottom: 10px; cursor: pointer; transition: .2s; }
+.check input { width: 19px; height: 19px; accent-color: var(--lime); }
+.check.on { border-color: var(--lime-dim); background: var(--lime-deep); }
+.check small { display: block; color: var(--muted); }
+
+.device { display: flex; align-items: center; gap: 18px; padding: 20px; background: var(--panel-2); border: 1px solid var(--line); margin-bottom: 18px; }
+.device .phone { width: 46px; height: 76px; border: 2px solid var(--lime); border-radius: 5px; position: relative; flex: none; box-shadow: 0 0 14px rgba(200,247,81,.3); }
+.device .phone::after { content: ""; position: absolute; bottom: 6px; left: 50%; width: 14px; height: 2px; margin-left: -7px; background: var(--lime); }
+.device.wait .phone { border-color: var(--line-2); box-shadow: none; animation: pulse 1.4s infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+.device b { font-size: 18px; display: block; font-family: var(--cond); } .device .ok { color: var(--lime); font-weight: 700; }
+
+#scan { overflow: hidden; }
+#scan::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--lime), transparent); animation: sweep 2.2s linear infinite; box-shadow: 0 0 12px var(--lime); }
+@keyframes sweep { from { transform: translateY(0); } to { transform: translateY(260px); } }
+.progress div { display: flex; gap: 13px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.progress div:last-child { border: 0; }
+.progress .ic { width: 20px; height: 20px; flex: none; border: 2px solid var(--line-2); }
+.progress .run .ic { border-color: var(--lime); border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+.progress .ok .ic { border: 0; background: var(--lime); position: relative; }
+.progress .ok .ic::after { content: "✓"; color: #0a0d12; font-size: 13px; font-weight: 800; position: absolute; inset: 0; display: grid; place-items: center; }
+.progress .ok, .progress .run { color: var(--text); }
+.progress em { margin-left: auto; font-style: normal; font-size: 13px; color: var(--lime-dim); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+.summary div { padding: 16px 18px; background: var(--panel-2); border: 1px solid var(--line); position: relative; }
+.summary b { display: block; font-family: var(--cond); font-size: 36px; line-height: 1; letter-spacing: 0; }
+.summary .h { border-color: var(--mag); color: var(--mag); } .summary .r { border-color: var(--amber); color: var(--amber); } .summary .n { border-color: var(--lime-dim); color: var(--lime); }
+.untouched { display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; background: var(--lime-deep); border: 1px solid var(--lime-dim); color: var(--lime); font-weight: 700; font-size: 13px; }
+
+.app { background: var(--panel-2); border: 1px solid var(--line); padding: 20px 22px; margin-bottom: 14px; border-left: 4px solid var(--line-2); animation: rise .5s ease both; }
+.app.HIGH { border-left-color: var(--mag); } .app.REVIEW { border-left-color: var(--amber); }
+.app .top { display: flex; gap: 16px; align-items: flex-start; }
+.app .name { font-family: var(--cond); font-size: 21px; font-weight: 700; }
+.app .meta { color: var(--muted); font-size: 13px; margin-top: 3px; }
+.chip { margin-left: auto; padding: 7px 14px; color: #0a0d12; font-weight: 800; font-size: 14px; white-space: nowrap; font-family: var(--cond); letter-spacing: .5px; }
+.chip.HIGH { background: var(--mag); color: #fff; } .chip.REVIEW { background: var(--amber); } .chip.NORMAL { background: var(--lime); }
+.bar { position: relative; height: 12px; margin: 18px 0 8px; background: var(--ink); border: 1px solid var(--line); overflow: visible; display: flex; }
+.bar span { height: 100%; transition: width .8s ease; border-right: 1px solid var(--ink); }
+.bar .tick { position: absolute; top: -4px; bottom: -4px; width: 1px; background: var(--muted); }
+.bar .tick::after { content: attr(data-l); position: absolute; top: 20px; left: -12px; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.reasons { margin-top: 24px; display: grid; gap: 8px; }
+.reason { display: flex; gap: 12px; align-items: baseline; padding: 10px 14px; border-left: 3px solid var(--mag); background: var(--ink); }
+.app.REVIEW .reason { border-left-color: var(--amber); }
+.reason .txt b { display: block; font-size: 15px; } .reason .txt span { color: var(--muted); font-size: 14px; }
+.reason .w { margin-left: auto; font-weight: 700; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.reason.good { border-left-color: var(--lime); }
+.normal-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.normal-list span { padding: 7px 12px; background: var(--panel-2); border: 1px solid var(--line); font-size: 13px; }
+.normal-list span::before { content: "✓ "; color: var(--lime); font-weight: 800; font-size: 11px; }
+details summary { cursor: pointer; font-weight: 600; color: var(--muted); margin-top: 8px; }
+details summary:hover { color: var(--lime); }
+.tip { margin-top: 20px; padding: 15px 17px; background: var(--amber-deep); border: 1px solid var(--amber); color: var(--amber); font-size: 14px; }
+.tip b { color: #ffd98a; }
+.chatblock { margin-bottom: 26px; }
+.msg { background: var(--panel-2); border: 1px solid var(--line); border-left: 4px solid var(--line-2); padding: 18px 20px; margin-bottom: 14px; animation: rise .45s ease both; }
+.msg.HIGH { border-left-color: var(--mag); } .msg.REVIEW { border-left-color: var(--amber); }
+.msg .top { display: flex; gap: 14px; align-items: flex-start; }
+.mtext { font-size: 16px; line-height: 1.5; flex: 1; }
+.cats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.cat { padding: 5px 11px; font-size: 12px; font-weight: 700; font-family: var(--cond); letter-spacing: .5px; color: var(--c); border: 1px solid var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); }
+.modelbadge { padding: 5px 11px; font-size: 12px; font-weight: 800; font-family: var(--cond); letter-spacing: .5px; color: #0a0d12; background: var(--violet); box-shadow: 0 0 12px rgba(155,107,255,.4); }
+.msg.REVIEW .reason { border-left-color: var(--amber); }
+
+.seal-box { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.seal-box div { padding: 13px 15px; background: var(--ink); border: 1px solid var(--line); min-width: 0; }
+.seal-box label { display: block; font-family: var(--cond); font-size: 12px; letter-spacing: .8px; text-transform: uppercase; color: var(--lime-dim); font-weight: 700; margin-bottom: 5px; }
+.seal-box .mono { font-size: 13px; color: var(--text); }
+.seal-box .wide { grid-column: span 2; }
+.hashing { font-size: 13px; color: var(--lime-dim); height: 20px; overflow: hidden; }
+.verdict { display: flex; gap: 14px; align-items: center; padding: 17px 19px; font-size: 17px; font-weight: 700; transition: .3s; border: 1px solid; }
+.verdict .big { font-size: 28px; }
+.verdict.ok { background: var(--lime-deep); border-color: var(--lime-dim); color: var(--lime); box-shadow: inset 0 0 30px rgba(200,247,81,.08); }
+.verdict.fail { background: var(--mag-deep); border-color: var(--mag); color: #ff6b96; animation: shake .45s; box-shadow: inset 0 0 30px rgba(255,45,111,.12); }
+.verdict small { display: block; font-weight: 500; font-size: 13.5px; opacity: .9; }
+.verdict .mono { font-size: 12px; font-weight: 400; }
+@keyframes shake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+.watch { font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.watch i { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 8px var(--lime); animation: pulse 1.2s infinite; }
+
+.chain { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 10px 0 16px; }
+.block { flex: none; width: 190px; padding: 14px; background: var(--raise); border: 1px solid var(--line-2); border-top: 2px solid var(--lime); color: var(--text); animation: rise .4s ease both; }
+.block.genesis { background: var(--panel-2); border-top-color: var(--line-2); color: var(--muted); width: 110px; display: grid; place-items: center; font-family: var(--cond); font-weight: 700; letter-spacing: 1px; }
+.block.bad { background: var(--mag-deep); border-color: var(--mag); border-top-color: var(--mag); }
+.block b { display: block; font-size: 13px; font-family: var(--cond); letter-spacing: .3px; } .block small { display: block; font-size: 11.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.block .mono { font-size: 11px; color: var(--lime); margin-top: 7px; }
+.link { flex: none; width: 34px; display: grid; place-items: center; color: var(--lime-dim); font-size: 18px; }
+
+.form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; margin-bottom: 16px; }
+input[type=text] { font: inherit; padding: 11px 14px; border-radius: 2px; border: 1px solid var(--line-2); background: var(--ink); color: var(--text); }
+input[type=text]::placeholder { color: var(--muted); }
+input[type=text]:focus { outline: none; border-color: var(--lime); box-shadow: 0 0 0 1px var(--lime); }
+.statutes { display: grid; gap: 8px; margin-bottom: 16px; }
+.statutes div { padding: 12px 15px; background: var(--ink); border: 1px solid var(--line); border-left: 3px solid var(--violet); }
+.statutes small { display: block; color: var(--muted); }
+pre.draft { white-space: pre-wrap; background: var(--ink); border: 1px solid var(--line); padding: 20px; font-family: var(--sans); font-size: 13.5px; line-height: 1.6; max-height: 420px; overflow: auto; color: var(--text); }
+.decide { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.decide div { padding: 17px; background: var(--panel-2); border: 1px solid var(--line); border-top: 2px solid var(--lime-dim); font-size: 14px; color: var(--muted); }
+.decide b { display: block; margin-bottom: 6px; font-size: 15px; font-family: var(--cond); color: var(--text); }
+.toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); background: var(--lime); color: #0a0d12; padding: 13px 22px; font-weight: 700; z-index: 20; box-shadow: 0 0 24px rgba(200,247,81,.4); }
+.replay { font-size: 12px; color: var(--amber); background: var(--amber-deep); border: 1px solid var(--amber); padding: 4px 9px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } #scan::after { display: none; } }
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } nav.steps { position: static; } .summary { grid-template-columns: repeat(2, 1fr); } .decide, .seal-box { grid-template-columns: 1fr; } .form { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Aran<b> Desk</b><span>அரண்</span></div>
+  <div class="sub">Help-desk spyware check · women's cell</div>
+  <div class="spacer"></div>
+  <span class="pill"><i></i>Offline · no cloud, no accounts</span>
+  <span class="pill" id="indicators">Echap indicators</span>
+  <div class="lang"><button class="on" data-lang="en">English</button><button data-lang="ta">தமிழ்</button></div>
+</header>
+
+<div class="layout">
+  <nav class="steps" id="steps">
+    <div class="step active" data-step="1"><div class="n">1</div><div><b>Consent</b><small>She agrees, safety plan</small></div></div>
+    <div class="step" data-step="2"><div class="n">2</div><div><b>Connect</b><small>USB, nothing installed</small></div></div>
+    <div class="step" data-step="3"><div class="n">3</div><div><b>Scan</b><small>Read-only</small></div></div>
+    <div class="step" data-step="4"><div class="n">4</div><div><b>Explain</b><small>Tamil + English reasons</small></div></div>
+    <div class="step" data-step="5"><div class="n">5</div><div><b>Seal</b><small>SHA-256 + Ed25519</small></div></div>
+    <div class="step" data-step="6"><div class="n">6</div><div><b>She decides</b><small>Vault, complaint, removal</small></div></div>
+    <div class="guarantees">
+      <div>Read-only adb commands only</div>
+      <div>Never uninstalls, disables or force-stops</div>
+      <div>No network calls</div>
+      <div>Every flag has a reason</div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section class="card" id="consent">
+      <h2>Before we start <span class="ta">தொடங்கும் முன்</span></h2>
+      <p class="lead">Nothing runs until she agrees. Read these to her in the language she prefers.</p>
+      <label class="check"><input type="checkbox" class="req"><div>She agrees to a read-only check of her phone<small>அவர் தனது போனை சோதிக்க ஒப்புக்கொள்கிறார்</small></div></label>
+      <label class="check"><input type="checkbox" class="req"><div>We have talked about her safety plan, in case he notices<small>அவரது பாதுகாப்புத் திட்டம் பற்றி பேசியுள்ளோம்</small></div></label>
+      <label class="check"><input type="checkbox"><div>She knows nothing will be removed unless she asks<small>அவர் கேட்காமல் எதுவும் அகற்றப்படாது</small></div></label>
+      <div class="row" style="margin-top:16px"><button class="btn" id="consentBtn" disabled>She agrees · continue</button></div>
+    </section>
+
+    <section class="card hidden" id="connect">
+      <h2>Connect her phone <span class="ta">போனை இணைக்கவும்</span></h2>
+      <p class="lead">USB cable, USB debugging on. Nothing is installed on her phone. The Desk only reads.</p>
+      <div class="device wait" id="deviceBox"><div class="phone"></div><div><b id="deviceName">Waiting for a phone…</b><span id="deviceSub">Settings → Developer options → USB debugging, then tap “Allow” on her phone.</span></div></div>
+      <div class="row"><button class="btn red" id="scanBtn" disabled>Scan phone</button><button class="btn ghost" id="replayBtn">Replay saved scan</button></div>
+    </section>
+
+    <section class="card hidden" id="scan">
+      <h2>Scanning <span class="ta">சோதனை நடக்கிறது</span></h2>
+      <p class="lead">Read-only: apps, permissions, hidden icons, install sources and dates.</p>
+      <div class="progress" id="progress"></div>
+    </section>
+
+    <section class="card hidden" id="results"></section>
+    <section class="card hidden" id="messages"></section>
+    <section class="card hidden" id="seal"></section>
+    <section class="card hidden" id="vault"></section>
+    <section class="card hidden" id="complaint"></section>
+    <section class="card hidden" id="decide"></section>
+  </main>
+</div>
+
+<script>
+const $ = (sel, root = document) => root.querySelector(sel);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const state = { lang: "en", findings: [], caseId: null, watchTimer: null, lastVerdict: null };
+
+function setStep(n) {
+  document.querySelectorAll(".step").forEach((el) => {
+    const i = +el.dataset.step;
+    el.classList.toggle("done", i < n);
+    el.classList.toggle("active", i === n);
+  });
+}
+function reveal(id) {
+  const el = $("#" + id);
+  el.classList.remove("hidden");
+  setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+  return el;
+}
+function toast(text) {
+  const t = document.createElement("div");
+  t.className = "toast"; t.textContent = text; document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2200);
+}
+async function api(path, body) {
+  const res = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
+  if (!res.ok) throw new Error((await res.json()).detail || res.statusText);
+  return res.json();
+}
+
+document.querySelectorAll(".lang button").forEach((b) => b.onclick = () => {
+  state.lang = b.dataset.lang;
+  document.querySelectorAll(".lang button").forEach((x) => x.classList.toggle("on", x === b));
+  if (state.findings.length) renderResults(state.findings, state.meta);
+});
+
+const required = [...document.querySelectorAll("#consent .req")];
+document.querySelectorAll("#consent .check input").forEach((input) => input.onchange = () => {
+  input.closest(".check").classList.toggle("on", input.checked);
+  $("#consentBtn").disabled = !required.every((r) => r.checked);
+});
+$("#consentBtn").onclick = () => { setStep(2); reveal("connect"); pollDevice(); $("#consentBtn").disabled = true; };
+
+let devicePoll;
+async function pollDevice() {
+  clearTimeout(devicePoll);
+  try {
+    const info = await (await fetch("/api/device")).json();
+    $("#indicators").textContent = `Echap · ${info.indicators} stalkerware packages`;
+    const box = $("#deviceBox");
+    if (info.device) {
+      box.classList.remove("wait");
+      $("#deviceName").textContent = info.device.model;
+      $("#deviceSub").innerHTML = `<span class="ok">● Connected over USB</span> · Android ${esc(info.device.android)} · read-only`;
+      $("#scanBtn").disabled = false;
+    } else {
+      box.classList.add("wait");
+      $("#deviceName").textContent = "Waiting for a phone…";
+      $("#scanBtn").disabled = true;
+    }
+  } catch (e) {}
+  if ($("#scan").classList.contains("hidden")) devicePoll = setTimeout(pollDevice, 1500);
+}
+
+const STEPS = [
+  ["connect", "Connecting over USB"], ["apps", "Listing user-installed apps"], ["perms", "Reading permissions, install sources and dates"],
+  ["icons", "Looking for hidden icons"], ["special", "Checking accessibility, notification and device-admin access"],
+  ["match", "Matching against known stalkerware"],
+];
+
+async function runScan(replay) {
+  clearTimeout(devicePoll);
+  $("#scanBtn").disabled = $("#replayBtn").disabled = true;
+  setStep(3); reveal("scan");
+  $("#progress").innerHTML = STEPS.map(([k, t], i) => `<div id="p-${k}" class="${i === 0 ? "run" : ""}"><span class="ic"></span>${t}<em></em></div>`).join("");
+  const res = await fetch(`/api/scan?replay=${replay ? 1 : 0}`, { method: "POST" });
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let nl;
+    while ((nl = buffer.indexOf("\n")) >= 0) {
+      const event = JSON.parse(buffer.slice(0, nl)); buffer = buffer.slice(nl + 1);
+      if (event.step) {
+        const row = $("#p-" + event.step);
+        row.className = "ok"; $("em", row).textContent = event.detail;
+        const next = row.nextElementSibling; if (next) next.className = "run";
+      } else if (event.error) {
+        toast(event.error); $("#scanBtn").disabled = $("#replayBtn").disabled = false; return;
+      } else if (event.result) {
+        await new Promise((r) => setTimeout(r, 450));
+        state.findings = event.result.findings; state.meta = event.result;
+        setStep(4); renderResults(state.findings, state.meta, true);
+      }
+    }
+  }
+}
+$("#scanBtn").onclick = () => runScan(false);
+$("#replayBtn").onclick = () => runScan(true);
+
+const COLORS = { watchware_list: "#ff2d6f", hides_icon: "#ff5277", reads_notifs: "#ff7a3c", accessibility: "#ff9d2e", device_admin: "#ffbe2e",
+  sideloaded: "#ffd84d", sensitive_bundle: "#9b6bff", battery_exempt: "#5a6b7a", boot: "#45525f", known: "#ff2d6f" };
+
+function appCard(f, i) {
+  const primary = state.lang === "en" ? "en" : "ta", secondary = primary === "en" ? "ta" : "en";
+  const positive = f.reasons.filter((r) => r.weight === null || r.weight > 0);
+  const segs = f.known ? `<span style="width:100%;background:${COLORS.known}"></span>`
+    : positive.map((r) => `<span title="${esc(r.en)}" style="width:${r.weight * 100}%;background:${COLORS[r.key] || "#999"}"></span>`).join("");
+  const installed = f.first_install ? `installed ${esc(String(f.first_install).slice(0, 16))}` : "";
+  return `<div class="app ${f.band}" style="animation-delay:${i * 120}ms">
+    <div class="top"><div><div class="name">${esc(f.label)}</div>
+      <div class="meta mono">${esc(f.package)}${f.version ? " · v" + esc(f.version) : ""}</div>
+      <div class="meta">${installed} · ${f.installer ? "from " + esc(f.installer) : "<b style='color:var(--red)'>not from an app store</b>"}</div></div>
+      <div class="chip ${f.band}">${f.band} ${f.score.toFixed(2)}</div></div>
+    <div class="bar">${segs}<i class="tick" style="left:35%" data-l="0.35 review"></i><i class="tick" style="left:70%" data-l="0.70 high"></i></div>
+    <div class="reasons">${f.reasons.map((r) => `<div class="reason ${r.weight !== null && r.weight < 0 ? "good" : ""}">
+      <div class="txt"><b>${esc(r[primary])}</b><span>${esc(r[secondary])}</span></div>
+      <div class="w">${r.weight === null ? "match" : (r.weight > 0 ? "+" : "−") + Math.abs(r.weight).toFixed(2)}</div></div>`).join("")}</div>
+  </div>`;
+}
+
+function renderResults(findings, meta, animate) {
+  const flagged = findings.filter((f) => f.band !== "NORMAL");
+  const normal = findings.filter((f) => f.band === "NORMAL");
+  const count = (b) => findings.filter((f) => f.band === b).length;
+  const el = $("#results");
+  el.innerHTML = `
+    <div class="row" style="margin-bottom:6px"><h2 style="margin:0">What we found <span class="ta">கண்டறிந்தவை</span></h2>
+      ${meta.replay ? '<span class="replay">replay of a saved scan</span>' : ""}<div style="flex:1"></div>
+      <span class="untouched">✓ Nothing has been removed · எதுவும் அகற்றப்படவில்லை</span></div>
+    <p class="lead">${esc(meta.device.model)} · Android ${esc(meta.device.android)} · every flag below comes with a reason she can read.</p>
+    <div class="summary"><div><b>${findings.length}</b>apps checked</div><div class="h"><b>${count("HIGH")}</b>high</div>
+      <div class="r"><b>${count("REVIEW")}</b>review</div><div class="n"><b>${count("NORMAL")}</b>look normal</div></div>
+    ${flagged.map(appCard).join("") || '<div class="verdict ok"><span class="big">✓</span>No suspicious apps found.</div>'}
+    <details ${flagged.length ? "" : "open"}><summary>${normal.length} apps look normal</summary>
+      <div class="normal-list">${normal.map((f) => `<span title="${esc(f.package)}">${esc(f.label)}</span>`).join("")}</div></details>
+    <div class="tip"><b>Phone looks clean but she still feels watched?</b> Check with her: WhatsApp → Linked devices, and Google Maps → Location sharing. Someone can watch without any app on the phone.</div>
+    <div class="row" style="margin-top:20px"><button class="btn" id="msgBtn">Check her messages</button>
+      <button class="btn ghost" id="skipMsgBtn">Skip to seal</button>
+      <span style="color:var(--muted);font-size:13.5px">Next: read her chat export for abuse — patterns + AI model.</span></div>`;
+  el.classList.remove("hidden");
+  if (animate) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+  $("#msgBtn").onclick = renderMessages;
+  $("#skipMsgBtn").onclick = sealReport;
+}
+
+const CAT_LABEL = { surveillance: ["Surveillance", "கண்காணிப்பு"], threat: ["Threat", "அச்சுறுத்தல்"],
+  control: ["Control", "கட்டுப்பாடு"], isolation: ["Isolation", "தனிமை"], abuse_slur: ["Slur", "அவதூறு"],
+  abuse_mild: ["Insult", "இழிவு"], model: ["AI model", "AI மாதிரி"] };
+const CAT_COLOR = { surveillance: "#ff7a3c", threat: "#ff2d6f", control: "#ffbe2e", isolation: "#9b6bff",
+  abuse_slur: "#ff2d6f", abuse_mild: "#ffd84d", model: "#9b6bff" };
+
+async function renderMessages() {
+  setStep(4);
+  const el = $("#messages");
+  const p = state.lang === "en" ? 0 : 1, s = p === 0 ? 1 : 0;
+  const ek = p ? "ta" : "en", sk = p ? "en" : "ta";
+  el.innerHTML = `<h2>Her messages <span class="ta">செய்திகள்</span></h2><p class="lead">Reading the chat export from her phone…</p>`;
+  reveal("messages");
+  let data;
+  try { data = await api(`/api/messages?replay=${state.meta.replay ? 1 : 0}`); }
+  catch (e) {
+    el.innerHTML = `<h2>Her messages <span class="ta">செய்திகள்</span></h2>
+      <div class="tip"><b>No chat export on the phone.</b> On her phone: WhatsApp → open the chat → ⋮ → More → Export chat (without media), save to Downloads, then try again. You can seal the app findings now.</div>
+      <div class="row" style="margin-top:18px"><button class="btn" id="mSealBtn">Seal report</button></div>`;
+    $("#mSealBtn").onclick = sealReport; return;
+  }
+  const chip = (c) => `<span class="cat" style="--c:${CAT_COLOR[c] || "#999"}">${(CAT_LABEL[c] || [c, c])[p]}</span>`;
+  const chats = data.chats.map((c) => {
+    const rows = c.flagged.map((f) => {
+      const cats = [...new Set(f.categories.map((h) => h.category))].map(chip).join("");
+      const badge = f.model_score != null ? `<span class="modelbadge">AI ${Math.round(f.model_score * 100)}%</span>` : "";
+      const reasons = f.categories.map((h) => `<div class="reason"><div class="txt"><b>${esc(h[ek])}</b><span>${esc(h[sk])}</span></div></div>`).join("");
+      return `<div class="msg ${f.band}"><div class="top"><div class="mtext">${esc(f.text)}</div><div class="chip ${f.band}">${f.band}</div></div>
+        <div class="cats">${cats}${badge}</div><div class="reasons">${reasons}</div></div>`;
+    }).join("");
+    return `<div class="chatblock"><div class="row" style="margin-bottom:4px"><b style="font-family:var(--cond);font-size:19px">${esc(c.source)}</b>
+        <span class="chip ${c.band}" style="margin-left:auto">${c.band}</span></div>
+      <p class="lead" style="margin:4px 0 14px">${c.incoming} incoming · ${c.flagged.length} flagged${c.categories.length ? " · " + c.categories.map((x) => (CAT_LABEL[x] || [x])[p] || x).join(", ") : ""}</p>
+      ${rows || '<div class="verdict ok"><span class="big">✓</span>Nothing abusive in this chat.</div>'}</div>`;
+  }).join("");
+  el.innerHTML = `<div class="row" style="margin-bottom:6px"><h2 style="margin:0">Her messages <span class="ta">செய்திகள்</span></h2>
+      ${data.replay ? '<span class="replay">replay of a saved export</span>' : ""}<div style="flex:1"></div>
+      <span class="untouched">✓ Read-only · எதுவும் மாற்றப்படவில்லை</span></div>
+    <p class="lead">${esc(data.method)}. <b>${data.flagged_total}</b> message(s) flagged across ${data.chats.length} chat(s). The violet <span style="color:var(--violet);font-weight:700">AI</span> badge marks what the trained model caught beyond the keyword patterns.</p>
+    ${chats}
+    <div class="row" style="margin-top:20px"><button class="btn" id="mSealBtn">Seal report</button>
+      <span style="color:var(--muted);font-size:13.5px">Messages and app findings are sealed together.</span></div>`;
+  $("#mSealBtn").onclick = sealReport;
+}
+
+async function sealReport() {
+  $("#sealBtn").disabled = true;
+  setStep(5);
+  const el = reveal("seal");
+  el.innerHTML = `<h2>Sealing the evidence <span class="ta">சான்று முத்திரை</span></h2><p class="lead">Hashing every finding and signing with the Desk's key…</p><div class="hashing mono" id="hashing"></div>`;
+  const hex = () => [...crypto.getRandomValues(new Uint8Array(32))].map((b) => b.toString(16).padStart(2, "0")).join("");
+  const spinner = setInterval(() => $("#hashing") && ($("#hashing").textContent = hex()), 45);
+  const [result] = await Promise.all([api("/api/seal", { safety_plan: true }), new Promise((r) => setTimeout(r, 1300))]);
+  clearInterval(spinner);
+  state.caseId = result.case_id;
+  el.innerHTML = `
+    <div class="row"><h2 style="margin:0">Report sealed <span class="ta">முத்திரையிடப்பட்டது</span></h2><div style="flex:1"></div>
+      <span class="untouched">✓ Nothing was removed</span></div>
+    <div class="seal-box">
+      <div><label>Case</label><span class="mono">${esc(result.case_id)}</span></div>
+      <div><label>Items sealed</label>${result.items} apps · consent recorded</div>
+      <div class="wide"><label>Evidence SHA-256</label><span class="mono">${esc(result.sha256)}</span></div>
+      <div class="wide"><label>Desk signature · Ed25519</label><span class="mono">${esc(result.ed25519)}</span></div>
+      <div class="wide"><label>Sealed file</label><span class="mono">${esc(result.path)}</span></div>
+    </div>
+    <div class="verdict ok" id="verdict"><span class="big">✓</span><div>Checking…</div></div>
+    <div class="row" style="margin-top:14px">
+      <a href="${result.report}" target="_blank"><button class="btn red">Open sealed PDF report</button></a>
+      <button class="btn outline" id="verifyBtn">Verify now</button>
+      <span class="watch"><i></i>Live seal watch · re-verifying the file on disk every 2 s</span></div>`;
+  $("#verifyBtn").onclick = () => verifyCase(true);
+  verifyCase();
+  state.watchTimer = setInterval(verifyCase, 2000);
+  setTimeout(showNext, 900);
+}
+
+async function verifyCase(manual) {
+  const result = await api(`/api/verify/${state.caseId}`);
+  const failures = Object.entries(result).filter(([, r]) => !r.ok);
+  const v = $("#verdict");
+  const key = JSON.stringify(failures.map(([k, r]) => k + r.message));
+  if (key === state.lastVerdict && !manual) return;
+  state.lastVerdict = key;
+  if (!failures.length) {
+    v.className = "verdict ok";
+    v.innerHTML = `<span class="big">✓</span><div>Sealed evidence is intact<small>${esc(result.evidence.message)}${result.report ? " · PDF signature valid" : ""}${result.vault ? " · Vault chain intact" : ""}</small></div>`;
+  } else {
+    const [, first] = failures[0];
+    v.className = "verdict fail";
+    v.innerHTML = `<span class="big">✘</span><div>Verification FAILED · tampering detected<small>${esc(first.message)}</small>
+      ${first.expected ? `<div class="mono">sealed&nbsp; ${first.expected}<br>now&nbsp;&nbsp;&nbsp;&nbsp; ${first.actual}</div>` : ""}</div>`;
+  }
+  if (manual) toast(failures.length ? "Tampering detected" : "Seal verified");
+}
+
+function showNext() {
+  setStep(6);
+  const vault = $("#vault");
+  vault.innerHTML = `<h2>Her Aran Vault <span class="ta">அவரது பெட்டகம்</span></h2>
+    <p class="lead">On her phone, a calculator. Behind a secret sum: her screenshots and chat exports in a hash chain. She taps Export; the Desk checks the chain and countersigns its head.</p>
+    <div class="row"><button class="btn" id="vaultBtn">Import Vault export from her phone</button><button class="btn ghost" id="vaultReplay">Use saved export</button></div>
+    <div id="vaultOut"></div>`;
+  vault.classList.remove("hidden");
+  $("#vaultBtn").onclick = () => importVault(false);
+  $("#vaultReplay").onclick = () => importVault(true);
+  renderComplaintCard(); renderDecide();
+}
+
+async function importVault(replay) {
+  let data;
+  try { data = await api(`/api/vault/${state.caseId}?replay=${replay ? 1 : 0}`); }
+  catch (e) { toast(e.message); return; }
+  const items = data.pack.items;
+  const bad = data.result.ok ? -1 : data.result.where;
+  const blocks = items.map((e, i) => `<div class="link">→</div><div class="block ${i === bad ? "bad" : ""}" style="animation-delay:${i * 220 + 200}ms">
+      <b>#${e.index + 1} · ${esc(e.type.replace("_", " "))}</b><small>${esc(e.name)}</small><small>${esc(String(e.added_at).replace("T", " ").slice(0, 16))}</small>
+      <div class="mono">${e.hash.slice(0, 16)}…</div></div>`).join("");
+  $("#vaultOut").innerHTML = `<div class="chain"><div class="block genesis">GENESIS</div>${blocks}</div>
+    <div class="verdict ${data.result.ok ? "ok" : "fail"}"><span class="big">${data.result.ok ? "✓" : "✘"}</span><div>${esc(data.result.message)}
+      ${data.countersignature ? `<small>Countersigned by this Desk at ${esc(data.countersignature.signed_at)} · <span class="mono">${data.countersignature.ed25519.slice(0, 48)}…</span></small>` : ""}
+      <small class="mono">${esc(data.path)}${data.source !== "replay" ? " ← " + esc(data.source) : ""}</small></div></div>`;
+  state.lastVerdict = null;
+}
+
+function renderComplaintCard() {
+  const el = $("#complaint");
+  el.innerHTML = `<h2>Complaint draft <span class="ta">புகார் வரைவு</span></h2>
+    <p class="lead">Aran drafts it with every evidence hash. <b>She reads it, edits it, and files it herself</b> on cybercrime.gov.in. Aran never submits anything.</p>
+    <div class="form"><input type="text" id="cName" placeholder="Her name (optional)"><input type="text" id="cContact" placeholder="Phone or email (optional)">
+      <button class="btn" id="draftBtn">Draft complaint</button></div><div id="complaintOut"></div>`;
+  el.classList.remove("hidden");
+  $("#draftBtn").onclick = async () => {
+    const data = await api(`/api/complaint/${state.caseId}`, { name: $("#cName").value, contact: $("#cContact").value });
+    $("#complaintOut").innerHTML = `<div class="statutes">${data.sections.map((s) => `<div>${esc(s.statute)}<small>${esc(s.why)}</small></div>`).join("")}</div>
+      <pre class="draft" id="draftText">${esc(data.text)}</pre>
+      <div class="row"><button class="btn outline" id="copyBtn">Copy text for the portal</button><a href="${data.pdf}" target="_blank"><button class="btn red">Open complaint PDF</button></a>
+      <span style="color:var(--muted);font-size:13px">Sections come only from a fixed, reviewed list. Not legal advice.</span></div>`;
+    $("#copyBtn").onclick = () => { navigator.clipboard.writeText(data.text); toast("Copied"); };
+    $("#complaintOut").scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+}
+
+function renderDecide() {
+  const el = $("#decide");
+  el.innerHTML = `<h2>She decides <span class="ta">அவரே முடிவு செய்கிறார்</span></h2>
+    <p class="lead">The evidence is sealed. Now, and only if she wants, the app can come off. Aran Desk cannot remove apps, by design.</p>
+    <div class="decide">
+      <div><b>Keep it for now</b>Safest if removing it might alert him. The sealed report stays valid.</div>
+      <div><b>Remove it herself</b>Settings → Apps → the app → Uninstall. If blocked, first Settings → Security → Device admin apps → turn off.</div>
+      <div><b>Before she leaves</b>Turn USB debugging off: Settings → Developer options. Give her the report, not her phone's data.</div>
+    </div>`;
+  el.classList.remove("hidden");
+}
+</script>
+</body>
+</html>

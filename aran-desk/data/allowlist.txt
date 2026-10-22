@@ -1,0 +1,26 @@
+# Known-good apps. Only counted when installed from an app store.
+com.whatsapp
+com.whatsapp.w4b
+com.x8bit.bitwarden
+com.lastpass.lpandroid
+com.agilebits.onepassword
+com.google.android.apps.authenticator2
+com.microsoft.office.outlook
+com.google.android.apps.nbu.paisa.user
+com.phonepe.app
+net.one97.paytm
+com.truecaller
+org.telegram.messenger
+com.instagram.android
+com.facebook.orca
+com.spotify.music
+com.google.android.apps.maps
+com.android.chrome
+com.google.android.gms
+com.samsung.android.app.watchmanager
+com.google.android.wearable.app
+com.microsoft.teams
+us.zoom.videomeetings
+com.duolingo
+com.openai.chatgpt
+com.anthropic.claude

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aran Desk · Test Setup</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%231c1f4a%22/><path d=%22M16 5l9 4v7c0 6-4 9-9 11-5-2-9-5-9-11V9z%22 fill=%22%23d9442b%22/></svg>">
+<style>
+:root {
+  --ink: #0a0d12; --panel: #111823; --panel-2: #0d141d; --raise: #16202d;
+  --line: #22303f; --line-2: #2d3f52; --muted: #7d8ea0; --text: #e7eef4;
+  --lime: #c8f751; --lime-dim: #93b936; --lime-deep: #1f2e12;
+  --mag: #ff2d6f; --mag-deep: #2e0f1b; --amber: #ffb02e; --amber-deep: #2d2410; --violet: #9b6bff;
+  --sans: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cond: "Avenir Next Condensed", "Avenir Next", -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); color: var(--text); font: 15px/1.5 var(--sans);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 46px 46px; background-position: center -1px; background-attachment: fixed; }
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(130% 80% at 80% -10%, rgba(200,247,81,.07), transparent 55%),
+    radial-gradient(120% 70% at 0% 110%, rgba(255,45,111,.06), transparent 55%); }
+h1, h2 { font-family: var(--cond); font-weight: 700; }
+.mono { font-family: var(--sans); font-variant-numeric: tabular-nums; letter-spacing: .3px; word-break: break-all; }
+button { font: inherit; font-weight: 600; cursor: pointer; border: 0; border-radius: 2px; padding: 12px 22px; transition: filter .15s, transform .05s; }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: .3; cursor: not-allowed; }
+.btn { background: var(--lime); color: #0a0d12; box-shadow: 0 0 0 1px var(--lime), 0 0 18px rgba(200,247,81,.25); }
+.btn:hover:not(:disabled) { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--muted); box-shadow: none; }
+.btn.ghost:hover { color: var(--lime); }
+header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 16px; padding: 15px 28px;
+  background: rgba(10,13,18,.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-2); }
+.logo { font-family: var(--cond); font-size: 25px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.logo b { color: var(--lime); }
+.tag { margin-left: auto; font-family: var(--cond); letter-spacing: 1px; text-transform: uppercase; font-size: 13px;
+  color: var(--amber); border: 1px solid var(--amber); padding: 5px 12px; }
+main { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; padding: 34px 24px 80px; }
+.card { background: var(--panel); border: 1px solid var(--line-2); padding: 26px 28px; margin-bottom: 20px; position: relative; }
+.card::before { content: ""; position: absolute; top: -1px; left: -1px; width: 20px; height: 20px; border-top: 2px solid var(--lime); border-left: 2px solid var(--lime); }
+h2 { margin: 0 0 6px; font-size: 24px; }
+.lead { color: var(--muted); margin: 0 0 18px; }
+.warn { background: var(--amber-deep); border: 1px solid var(--amber); color: var(--amber); padding: 14px 16px; font-size: 14px; }
+.warn b { color: #ffd98a; }
+.device { display: flex; align-items: center; gap: 16px; padding: 16px 18px; background: var(--panel-2); border: 1px solid var(--line); margin-bottom: 18px; }
+.phone { width: 42px; height: 70px; border: 2px solid var(--line-2); border-radius: 5px; flex: none; position: relative; }
+.device.ready .phone { border-color: var(--lime); box-shadow: 0 0 14px rgba(200,247,81,.3); }
+.phone::after { content: ""; position: absolute; bottom: 6px; left: 50%; width: 13px; height: 2px; margin-left: -6px; background: currentColor; opacity: .5; }
+.device b { font-family: var(--cond); font-size: 18px; display: block; }
+.device.ready b { color: var(--lime); }
+.device span { color: var(--muted); font-size: 13px; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.steps { list-style: none; margin: 18px 0 0; padding: 0; }
+.steps li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; background: var(--panel-2); border-left: 3px solid var(--line-2); margin-bottom: 8px; animation: rise .4s ease both; }
+.steps li.ok { border-left-color: var(--lime); } .steps li.fail { border-left-color: var(--mag); }
+.steps .ic { font-family: var(--cond); font-weight: 800; flex: none; width: 20px; }
+.steps li.ok .ic { color: var(--lime); } .steps li.fail .ic { color: var(--mag); }
+.steps .d { color: var(--muted); font-size: 13px; margin-top: 2px; word-break: break-word; }
+.manual { margin-top: 20px; padding: 16px 18px; background: var(--raise); border: 1px solid var(--line); font-size: 14px; }
+.manual b { color: var(--lime); font-family: var(--cond); letter-spacing: .5px; }
+.manual ol { margin: 10px 0 0; padding-left: 20px; } .manual li { margin: 5px 0; }
+code { background: var(--ink); padding: 2px 6px; border: 1px solid var(--line); font-family: var(--sans); font-variant-numeric: tabular-nums; }
+a { color: var(--lime); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Aran<b> Desk</b></div>
+  <div class="tag">Test setup · not for the victim flow</div>
+</header>
+<main>
+  <section class="card">
+    <h2>Install Aran Vault on a test phone</h2>
+    <p class="lead">Sideloads the vault app onto the connected phone and grants it notification access, so you can test live abuse capture. Use your own test device.</p>
+    <div class="warn"><b>This writes to the phone.</b> Unlike the read-only scanner, this installs an app. Only run it on a device you own and control for testing.</div>
+    <div class="device" id="deviceBox"><div class="phone"></div><div><b id="deviceName">Looking for a phone…</b><span id="deviceSub">USB cable, USB debugging on, then tap “Allow”.</span></div></div>
+    <div class="row"><button class="btn" id="installBtn" disabled>Install Aran Vault</button>
+      <a class="btn ghost" href="/">← Back to the scanner</a></div>
+    <ul class="steps" id="steps"></ul>
+    <div class="manual">
+      <b>After install — on the phone</b>
+      <ol>
+        <li>Open the <b>Calculator</b> (the vault's disguise), type the PIN to reveal the vault.</li>
+        <li>If notification access wasn't granted automatically: Settings → Notifications → <b>Notification access</b> → enable <b>Aran Vault</b>.</li>
+        <li>On ColorOS: Settings → Battery → allow background activity for Aran Vault.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+<script>
+const $ = (s) => document.querySelector(s);
+async function poll() {
+  try {
+    const info = await (await fetch("/api/device")).json();
+    const d = info.device, box = $("#deviceBox");
+    if (d) {
+      box.classList.add("ready");
+      $("#deviceName").textContent = (d.model || "Phone") + (d.android ? " · Android " + d.android : "");
+      $("#deviceSub").textContent = "Connected and authorised.";
+      $("#installBtn").disabled = false;
+    } else {
+      box.classList.remove("ready");
+      $("#deviceName").textContent = "Looking for a phone…";
+      $("#deviceSub").textContent = "USB cable, USB debugging on, then tap “Allow”.";
+      $("#installBtn").disabled = true;
+    }
+  } catch (e) {}
+  setTimeout(poll, 2000);
+}
+poll();
+$("#installBtn").onclick = async () => {
+  const btn = $("#installBtn"), steps = $("#steps");
+  btn.disabled = true; btn.textContent = "Installing…";
+  steps.innerHTML = `<li><span class="ic">…</span><div><b>Installing ${""}</b><div class="d">Pushing the APK over USB — accept any prompt on the phone.</div></div></li>`;
+  try {
+    const res = await fetch("/api/install-vault", { method: "POST" });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || "Install failed");
+    steps.innerHTML = data.steps.map((s) =>
+      `<li class="${s.ok ? "ok" : "fail"}"><span class="ic">${s.ok ? "✓" : "✕"}</span><div><b>${s.name}</b><div class="d">${s.detail}</div></div></li>`).join("");
+    btn.textContent = data.ok ? "Installed ✓ — install again" : "Retry install";
+  } catch (e) {
+    steps.innerHTML = `<li class="fail"><span class="ic">✕</span><div><b>Could not install</b><div class="d">${e.message}</div></div></li>`;
+    btn.textContent = "Retry install";
+  }
+  btn.disabled = false;
+};
+</script>
+</body>
+</html>

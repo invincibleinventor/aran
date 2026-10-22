@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+aran-desk/.venv/
+
+# Secrets — the Desk's Ed25519 signing key regenerates on first run
+aran-desk/keys/
+
+# Runtime / generated artifacts
+aran-desk/cases/
+aran-desk/fixtures/latest_live.json
+aran-desk/fixtures/_chat_pull.txt
+
+# Build intermediates
+android/build/
+*.unaligned.apk
+*.idsig
+
+# Tooling / scratch
+.playwright-mcp/
+.DS_Store

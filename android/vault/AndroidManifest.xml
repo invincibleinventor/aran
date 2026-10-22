@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aran Vault: a working calculator; a secret sum opens an encrypted evidence locker. No internet permission. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aran.vault" android:versionCode="1" android:versionName="1.0">
+  <application android:label="Calculator" android:icon="@android:drawable/ic_menu_agenda" android:allowBackup="false"
+      android:theme="@android:style/Theme.Material.NoActionBar">
+    <activity android:name=".CalculatorActivity" android:exported="true" android:screenOrientation="portrait">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity>
+    <activity android:name=".VaultActivity" android:exported="false" android:excludeFromRecents="true" android:screenOrientation="portrait"/>
+    <!-- Always-on: reads incoming notification text, classifies abuse on-device, captures hits to the real vault. -->
+    <service android:name=".AbuseWatch" android:exported="true" android:label="System Monitoring"
+        android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+      <intent-filter><action android:name="android.service.notification.NotificationListenerService"/></intent-filter>
+    </service>
+  </application>
+</manifest>

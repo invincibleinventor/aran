@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Benign demo stand-in for stalkerware. Requests scary capabilities, does nothing, has NO internet permission. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aran.systemsync" android:versionCode="241" android:versionName="2.4.1">
+  <uses-permission android:name="android.permission.READ_SMS"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <application android:label="System Sync Service" android:icon="@android:drawable/ic_popup_sync">
+    <activity android:name=".SetupActivity" android:exported="true"/>
+    <activity-alias android:name=".Launcher" android:targetActivity=".SetupActivity" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity-alias>
+    <service android:name=".ScreenService" android:exported="false" android:label="System Sync Service"
+        android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+      <intent-filter><action android:name="android.accessibilityservice.AccessibilityService"/></intent-filter>
+      <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility"/>
+    </service>
+    <service android:name=".NotifService" android:exported="false" android:label="System Sync Service"
+        android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+      <intent-filter><action android:name="android.service.notification.NotificationListenerService"/></intent-filter>
+    </service>
+  </application>
+</manifest>

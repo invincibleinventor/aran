@@ -1,0 +1,368 @@
+{
+  "device": {
+    "model": "Google Pixel 7a",
+    "android": "15",
+    "sdk": "35",
+    "serial_sha256": "d4abd70f8553f9270d6645950104735617b1dcef82296ed8107734be9b9a6f24"
+  },
+  "collected_at": "2026-10-22T09:30:00+00:00",
+  "apps": [
+    {
+      "package": "com.aran.systemsync",
+      "label": "System Sync Service",
+      "installer": null,
+      "version": "2.4.1",
+      "first_install": "2026-10-09 23:41:17",
+      "last_update": "2026-10-09 23:41:17",
+      "requested": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.READ_SMS"
+      ],
+      "granted": [],
+      "has_launcher": false,
+      "accessibility": true,
+      "notif_listener": true,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.aran.batterysaver",
+      "label": "Battery Saver Plus",
+      "installer": null,
+      "version": "5.0.2",
+      "first_install": "2026-10-09 23:44:52",
+      "last_update": "2026-10-09 23:44:52",
+      "requested": [
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": true,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.x8bit.bitwarden",
+      "label": "Bitwarden",
+      "installer": "com.android.vending",
+      "version": "2026.9.0",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.CAMERA",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": true,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.whatsapp",
+      "label": "WhatsApp",
+      "installer": "com.android.vending",
+      "version": "2.26.21.7",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_CONTACTS",
+        "android.permission.READ_SMS",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": true
+    },
+    {
+      "package": "com.instagram.android",
+      "label": "Instagram",
+      "installer": "com.android.vending",
+      "version": "402.0.0.39.71",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.CAMERA",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.google.android.apps.nbu.paisa.user",
+      "label": "Google Pay",
+      "installer": "com.android.vending",
+      "version": "301.1.2",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.CAMERA",
+        "android.permission.READ_SMS",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.phonepe.app",
+      "label": "PhonePe",
+      "installer": "com.android.vending",
+      "version": "25.10.07",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.CAMERA",
+        "android.permission.READ_CONTACTS",
+        "android.permission.READ_SMS",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.truecaller",
+      "label": "Truecaller",
+      "installer": "com.android.vending",
+      "version": "15.38.6",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.READ_CALL_LOG",
+        "android.permission.READ_CONTACTS",
+        "android.permission.READ_SMS",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "org.telegram.messenger",
+      "label": "Telegram",
+      "installer": "com.android.vending",
+      "version": "12.1.0",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.CAMERA",
+        "android.permission.READ_CONTACTS",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.spotify.music",
+      "label": "Spotify",
+      "installer": "com.android.vending",
+      "version": "9.0.86",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "in.swiggy.android",
+      "label": "Swiggy",
+      "installer": "com.android.vending",
+      "version": "4.88.1",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.application.zomato",
+      "label": "Zomato",
+      "installer": "com.android.vending",
+      "version": "18.6.2",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.google.android.apps.classroom",
+      "label": "Google Classroom",
+      "installer": "com.android.vending",
+      "version": "11.2",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.duolingo",
+      "label": "Duolingo",
+      "installer": "com.android.vending",
+      "version": "6.48.4",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.openai.chatgpt",
+      "label": "ChatGPT",
+      "installer": "com.android.vending",
+      "version": "1.2026.290",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "in.startv.hotstar",
+      "label": "JioHotstar",
+      "installer": "com.android.vending",
+      "version": "25.10.13",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.digilocker.android",
+      "label": "DigiLocker",
+      "installer": "com.android.vending",
+      "version": "8.4.1",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.CAMERA"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.sbi.lotusintouch",
+      "label": "YONO SBI",
+      "installer": "com.android.vending",
+      "version": "1.24.32",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.READ_SMS"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.rapido.passenger",
+      "label": "Rapido",
+      "installer": "com.android.vending",
+      "version": "8.42.0",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    },
+    {
+      "package": "com.flipkart.android",
+      "label": "Flipkart",
+      "installer": "com.android.vending",
+      "version": "7.95",
+      "first_install": "2025-11-02 10:14:03",
+      "last_update": "2025-11-02 10:14:03",
+      "requested": [],
+      "granted": [],
+      "has_launcher": true,
+      "accessibility": false,
+      "notif_listener": false,
+      "device_admin": false,
+      "battery_exempt": false
+    }
+  ]
+}

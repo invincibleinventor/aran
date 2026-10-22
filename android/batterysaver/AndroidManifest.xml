@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Benign demo app that lands in the REVIEW band: device admin + starts at boot + sideloaded. No internet. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aran.batterysaver" android:versionCode="502" android:versionName="5.0.2">
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <application android:label="Battery Saver Plus" android:icon="@android:drawable/ic_lock_idle_low_battery">
+    <activity android:name=".MainActivity" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity>
+    <receiver android:name=".Admin" android:exported="true" android:permission="android.permission.BIND_DEVICE_ADMIN">
+      <meta-data android:name="android.app.device_admin" android:resource="@xml/device_admin"/>
+      <intent-filter><action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/></intent-filter>
+    </receiver>
+    <receiver android:name=".Boot" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED"/></intent-filter>
+    </receiver>
+  </application>
+</manifest>

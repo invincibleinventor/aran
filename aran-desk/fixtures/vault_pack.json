@@ -1,0 +1,38 @@
+{
+  "source": "aran-vault",
+  "format": "aran-vault/1",
+  "exported_at": "2026-10-22T09:20:00Z",
+  "items": [
+    {
+      "index": 0,
+      "type": "screenshot",
+      "name": "Screenshot_20261012_2214.png",
+      "added_at": "2026-10-12T16:44:10Z",
+      "content_sha256": "6e474fbcce142d470a3f000a0877e16f62c25053a9c6a2739ae88b15502e9897",
+      "cipher_sha256": "3610758d856ace3a2ad79d06a2629c411e7ae1fb7d561db6d3b65ff76cf65e01",
+      "prev": "GENESIS",
+      "hash": "b939bcf087afa6f5a489eaea7984d140544af13fa744532df640d3e7fc81bb17"
+    },
+    {
+      "index": 1,
+      "type": "chat_export",
+      "name": "WhatsApp Chat with R.txt",
+      "added_at": "2026-10-14T08:02:51Z",
+      "content_sha256": "eaeb9111b1c6744278e803977dbf25fbdac6a9b6d32244ec91fc0c8266a7f65b",
+      "cipher_sha256": "573f5fbb0fcb213698c5fe9b9dae4c628aa6195512dfdf89d4164d3cf4798995",
+      "prev": "b939bcf087afa6f5a489eaea7984d140544af13fa744532df640d3e7fc81bb17",
+      "hash": "23aa0edf9c27e4c05b75b92adccb0c870ba4bbc39f151a4117d505a12d2c7eb0"
+    },
+    {
+      "index": 2,
+      "type": "screenshot",
+      "name": "Screenshot_20261019_0131.png",
+      "added_at": "2026-10-19T20:01:33Z",
+      "content_sha256": "5387ccc15e3710727bd4117017869a40c058b41147555eb6261822fd1f1286cc",
+      "cipher_sha256": "5b1cd558c3e33a4723390c65009920f4096bbfb4088b065f4feee55c1b88c941",
+      "prev": "23aa0edf9c27e4c05b75b92adccb0c870ba4bbc39f151a4117d505a12d2c7eb0",
+      "hash": "4a5c9d43660176418bc68c28ee3e7e735188fd141b6c18eb5bea894b09239e1e"
+    }
+  ],
+  "head": "4a5c9d43660176418bc68c28ee3e7e735188fd141b6c18eb5bea894b09239e1e"
+}
